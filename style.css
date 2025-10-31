@@ -31,6 +31,7 @@ nav ul {
   list-style: none;
   display: flex;
   gap: 25px;
+  flex-wrap: wrap;
 }
 
 nav ul li a {
@@ -65,35 +66,66 @@ section {
   opacity: 0.9;
 }
 
+/* flip */
 .profil-container {
   display: flex;
   justify-content: center;
-  gap: 40px;
   flex-wrap: wrap;
+  gap: 40px;
 }
 
 .profil-card {
-  background: white;
-  padding: 20px;
+  perspective: 1000px;
+  width: 250px;
+  height: 330px;
+  cursor: pointer;
+}
+
+.profil-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.profil-card.flipped .profil-inner {
+  transform: rotateY(180deg);
+}
+
+.profil-front, .profil-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   border-radius: 12px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  width: 250px;
-  transition: 0.3s;
+  backface-visibility: hidden;
+  background: white;
+  padding: 20px;
 }
 
-.profil-card:hover {
-  transform: translateY(-8px);
-}
-
-.profil-card img {
-  width: 180px;
-  height: 180px;
+.profil-front img {
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   border: 4px solid #00bcd4;
   margin-bottom: 10px;
 }
 
-/* yang our work */
+.profil-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profil-back h3 {
+  color: #00bcd4;
+  margin-bottom: 10px;
+}
+
+/* Our Work */
 #work {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -113,6 +145,7 @@ section {
   transform: translateY(-8px);
 }
 
+/* Form */
 form {
   display: flex;
   flex-direction: column;
@@ -144,7 +177,7 @@ form button:hover {
   background-color: #0199ad;
 }
 
-/* kaki */
+/* Footer */
 footer {
   background-color: #222;
   color: white;
@@ -153,14 +186,42 @@ footer {
   margin-top: 50px;
 }
 
-@media screen and (max-width: 767px) {
-  .navigation {
+@media screen and (max-width: 768px) {
+  header {
     flex-direction: column;
+    padding: 15px 30px;
+    text-align: center;
   }
-}
 
-@media screen and (min-width: 768px) {
-  .sidebar {
-    width: 25%;
+  nav ul {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  section {
+    padding: 50px 20px;
+  }
+
+  #home h2 {
+    font-size: 28px;
+  }
+
+  #home p {
+    font-size: 16px;
+  }
+
+  .profil-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profil-card {
+    width: 80%;
+    height: 340px;
+  }
+
+  .profil-front img {
+    width: 120px;
+    height: 120px;
   }
 }
